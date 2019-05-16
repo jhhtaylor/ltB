@@ -3,11 +3,16 @@
 import sys
 import re
 
-
+"""
+This program is used to create an exam timetbale for lecturers.
+Inputs: examlist.csv and lectlist.csv
+Outputs: certains elements within the csv files
+"""
+'''Returns the course'''
 def getCourse(line):
     l_name, c_name = line.rstrip().split(",")    ##EE1
     return c_name, l_name   #EE2
-
+'''Returns the courses for lecturer'''
 def getCoursesForLects(lectsfn):
     courses = {}  # dictionary: for each lect returns list of courses
     lf = open(lectsfn)
@@ -19,14 +24,14 @@ def getCoursesForLects(lectsfn):
             courses[lect] = [course]  
     lf.close()
     return courses
-
+'''Returns the exams'''
 def getExams(examfname):
     exams = {}
     for line in open(examfname):
         data = line.rstrip().split(",")
         exams[data[0]]=(data[1],data[2])
     return exams
-
+'''Returns the timetable'''
 def getTimeTable(courses,exams):
     ttable = []  # nested list -- for each lect a list of exams
     for lect in sorted(courses.keys()):
@@ -40,7 +45,7 @@ def getTimeTable(courses,exams):
             l_exams.append((c,the_exam))
         ttable.append((lect,l_exams)) # now we know the exams add it list
     return ttable
-
+'''Prints the course'''
 def showTimeTable(ttable):
     for (lect, l_exams) in ttable:
         print(lect)

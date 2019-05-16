@@ -10,8 +10,8 @@ Outputs: certains elements within the csv files
 """
 '''Returns the course'''
 def getCourse(line):
-    l_name, c_name = line.rstrip().split(",")    ##EE1
-    return c_name, l_name   #EE2
+    l_name, c_name = line.strip().split("/")    ##EE1 fixed
+    return l_name, c_name   #EE2 fixed
 '''Returns the courses for lecturer'''
 def getCoursesForLects(lectsfn):
     courses = {}  # dictionary: for each lect returns list of courses
@@ -19,7 +19,7 @@ def getCoursesForLects(lectsfn):
     for line in lf:
         lect, course = getCourse(line)
         if lect in courses: # is the lecturer in the dictionary
-            courses[lect].append(lect)  # add course to the list ##EE3
+            courses[lect].append(course)  # add course to the list ##EE3 fixed
         else:
             courses[lect] = [course]  
     lf.close()
@@ -54,8 +54,8 @@ def showTimeTable(ttable):
         
 
 if __name__ == "__main__":
-    examfn    = sys.argv[1]
-    lectsfn     = sys.argv[2]
+    examfn    =  sys.argv[0] #"examlist.csv"
+    lectsfn     = sys.argv[2] #"lectlist.csv"
     courses    = getCoursesForLects(lectsfn)
     exams     = getExams(examfn)
     tt = getTimeTable(courses,exams)

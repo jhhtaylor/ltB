@@ -1,0 +1,16 @@
+#!/ust/bin/env python3
+
+import unittest
+import find_exams
+
+class TestExclude(unittest.TestCase):
+   
+	'''Returns the courses for lecturer'''
+	def test_getCoursesForLects(self):
+	    f = open("find_exams/lectlist.csv")
+	    ans = find_exams.find_exams.getCoursesForLects(f)
+	    self.assertEqual(ans, "hello")
+	    f.close()
+
+if __name__ == '__main__':
+	unittest.main()
